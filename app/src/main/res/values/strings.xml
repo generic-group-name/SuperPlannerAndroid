@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SupperPlannerAndroid</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="welcome_activity_label">WelcomeActivity</string>
+</resources>
