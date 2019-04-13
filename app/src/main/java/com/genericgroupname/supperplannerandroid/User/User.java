@@ -1,27 +1,84 @@
 package com.genericgroupname.supperplannerandroid.User;
 
-public class User {
-    private Long id;
-    private String name;
-    private Integer age;
-    private Double weight;
-    private Double height;
-    private Sex sex;
-    private ThemeName themeName;
-    private Boolean prefferedEye;
-    private Boolean prefferedBack;
-    private Boolean prefferedPsycho;
+import com.genericgroupname.supperplannerandroid.Utils.JsonParser;
 
-    public User(Long id, String name, Integer age, Double weight, Double height, Sex sex, ThemeName themeName, Boolean preferredEye, Boolean preferredBack, Boolean preferredPsycho) {
-        this.id = id;
+import org.json.JSONException;
+
+import java.io.IOException;
+
+public class User {
+    final private String name;
+    final private Integer age;
+    final private Double weight;
+    final private Double height;
+    final private Sex sex;
+    final private ThemeName themeName;
+    final private Boolean preferredEye;
+    final private Boolean preferredBack;
+    final private Boolean preferredPsycho;
+    private JsonParser jsonParser;
+
+    public User(String name, Integer age, Double weight, Double height, Sex sex, ThemeName themeName, Boolean preferredEye, Boolean preferredBack, Boolean preferredPsycho) throws IOException, JSONException {
         this.name = name;
         this.age = age;
         this.weight = weight;
         this.height = height;
         this.sex = sex;
         this.themeName = themeName;
-        this.prefferedEye = preferredEye;
-        this.prefferedBack = preferredBack;
-        this.prefferedPsycho = preferredPsycho;
+        this.preferredEye = preferredEye;
+        this.preferredBack = preferredBack;
+        this.preferredPsycho = preferredPsycho;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public Double getHeight() {
+        return height;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public ThemeName getThemeName() {
+        return themeName;
+    }
+
+    public Boolean getPreferredEye() {
+        return preferredEye;
+    }
+
+    public Boolean getPreferredBack() {
+        return preferredBack;
+    }
+
+    public Boolean getPreferredPsycho() {
+        return preferredPsycho;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", weight=" + weight +
+                ", height=" + height +
+                ", sex=" + sex +
+                ", themeName=" + themeName +
+                ", preferredEye=" + preferredEye +
+                ", preferredBack=" + preferredBack +
+                ", preferredPsycho=" + preferredPsycho +
+                ", jsonParser=" + jsonParser +
+                '}';
     }
 }

@@ -1,5 +1,16 @@
 package com.genericgroupname.supperplannerandroid.User;
 
-enum ThemeName {
-    DARK,LIGHT;
+import com.genericgroupname.supperplannerandroid.Utils.Names;
+
+public enum ThemeName {
+    DARK("dark"),LIGHT("light");
+    private String themeName;
+
+    ThemeName(String themeName) {
+        this.themeName = themeName;
+    }
+
+    public String getThemeName() {
+        return themeName;
+    }
 }

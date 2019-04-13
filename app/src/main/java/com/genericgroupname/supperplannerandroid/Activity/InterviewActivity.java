@@ -1,5 +1,6 @@
 package com.genericgroupname.supperplannerandroid.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,8 +8,16 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.genericgroupname.supperplannerandroid.R;
+import com.genericgroupname.supperplannerandroid.User.User;
+import com.genericgroupname.supperplannerandroid.User.UserBuilder;
+import com.genericgroupname.supperplannerandroid.Utils.JsonParser;
+
+import org.json.JSONException;
+
+import java.io.IOException;
 
 public class InterviewActivity extends AppCompatActivity {
 private EditText name,age,weight,height;
@@ -40,6 +49,7 @@ private Button nextBtn;
                 woman.setChecked(false);
             }
         });
+        System.out.println(WelcomeActivity.getUser.toString());
         woman.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +59,26 @@ private Button nextBtn;
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                UserBuilder userBuilder = new UserBuilder(name,age,weight,height,man,woman,lightTheme,darkTheme,eyeProblems,backProblems,mindProblems);
+                User user = null;
+                try {
+                    user = userBuilder.build();
+                } catch (Exception e) {
+                    Toast.makeText(InterviewActivity.this, "Wrong input data", Toast.LENGTH_SHORT).show();
+                }
+                if(user == null)
+                    Toast.makeText(InterviewActivity.this, "Wrong input data", Toast.LENGTH_SHORT).show();
+                    else{
+                    JsonParser jsonParser = new JsonParser(getApplicationContext());
+                    try {
+                        jsonParser.saveJson(user);
+                    } catch (JSONException | IOException e) {
+                        e.printStackTrace();
+                    }
+                    Intent s = new Intent(getApplicationContext(), MainMenuActivity.class);
+                        finish();
+                        startActivity(s);
+                    }
 
             }
         });

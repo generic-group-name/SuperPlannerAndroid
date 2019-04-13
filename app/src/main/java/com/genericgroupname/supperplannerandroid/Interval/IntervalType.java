@@ -3,7 +3,12 @@ package com.genericgroupname.supperplannerandroid.Interval;
 enum IntervalType {
     BREAK("Break"),WORK("Work");
 
-    IntervalType(String intervalType) {
+    private String intervalName;
 
+    IntervalType(String intervalName) {
+    }
+
+    public String getIntervalName() {
+        return intervalName;
     }
 }
