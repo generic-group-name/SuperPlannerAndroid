@@ -49,7 +49,6 @@ private Button nextBtn;
                 woman.setChecked(false);
             }
         });
-        System.out.println(WelcomeActivity.getUser.toString());
         woman.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +74,7 @@ private Button nextBtn;
                     } catch (JSONException | IOException e) {
                         e.printStackTrace();
                     }
+                    WelcomeActivity.getUser = user;
                     Intent s = new Intent(getApplicationContext(), MainMenuActivity.class);
                         finish();
                         startActivity(s);

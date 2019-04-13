@@ -26,7 +26,6 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         Button letsGoBtn = findViewById(R.id.letsGoBtn);
         JsonParser jsonParser = new JsonParser(getApplicationContext());
-       // JSONObject jsonObject = jsonParser.readObject();
 
         try {
             getUser = jsonParser.getUser();
@@ -46,7 +45,7 @@ public class WelcomeActivity extends AppCompatActivity {
                if(PlanService.isRunning != null )
                    if(PlanService.isRunning)
                    Toast.makeText(WelcomeActivity.this, "true", Toast.LENGTH_SHORT).show();
-                Intent s = new Intent(getApplicationContext(), MainMenuActivity.class);
+                Intent s = new Intent(getApplicationContext(), InterviewActivity.class);
                 finish();
                 startActivity(s);
             }

@@ -16,9 +16,10 @@ public class User {
     final private Boolean preferredEye;
     final private Boolean preferredBack;
     final private Boolean preferredPsycho;
+    private Integer numberOfTrainingDay;
     private JsonParser jsonParser;
 
-    public User(String name, Integer age, Double weight, Double height, Sex sex, ThemeName themeName, Boolean preferredEye, Boolean preferredBack, Boolean preferredPsycho) throws IOException, JSONException {
+    public User(String name, Integer age, Double weight, Double height, Sex sex, ThemeName themeName, Boolean preferredEye, Boolean preferredBack, Boolean preferredPsycho, Integer numberOfTrainingDay) throws IOException, JSONException {
         this.name = name;
         this.age = age;
         this.weight = weight;
@@ -28,6 +29,15 @@ public class User {
         this.preferredEye = preferredEye;
         this.preferredBack = preferredBack;
         this.preferredPsycho = preferredPsycho;
+        this.numberOfTrainingDay = numberOfTrainingDay;
+    }
+
+    public Integer getNumberOfTrainingDay() {
+        return numberOfTrainingDay;
+    }
+
+    public void setNumberOfTrainingDay(Integer numberOfTrainingDay) {
+        this.numberOfTrainingDay = numberOfTrainingDay;
     }
 
     public String getName() {

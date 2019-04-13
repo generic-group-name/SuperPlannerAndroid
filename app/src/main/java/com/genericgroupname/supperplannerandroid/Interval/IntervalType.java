@@ -1,6 +1,6 @@
 package com.genericgroupname.supperplannerandroid.Interval;
 
-enum IntervalType {
+public enum IntervalType {
     BREAK("Break"),WORK("Work");
 
     private String intervalName;
