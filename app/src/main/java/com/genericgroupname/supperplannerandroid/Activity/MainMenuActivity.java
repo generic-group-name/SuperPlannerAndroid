@@ -216,7 +216,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 content.removeAllViews();
                 content.addView(View.inflate(getApplicationContext(), R.layout.drink_layout, null));
                 final ListView listView = findViewById(R.id.listDrink);
-                CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(),drinkManager.getDri());
+                CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), drinkManager.getDri());
                 listView.setAdapter(customAdapter);
 
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -224,23 +224,18 @@ public class MainMenuActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position,
                                             long id) {
                         Drink drink = drinkManager.getDri().get(position);
-                        Toast.makeText(MainMenuActivity.this, "kliknieto "+drink.getName(), Toast.LENGTH_SHORT).show();
-                        if(!drinkManager.getDrunkDrunks().contains(drink))
+                        Toast.makeText(MainMenuActivity.this, "kliknieto " + drink.getName(), Toast.LENGTH_SHORT).show();
+
                             drinkManager.getDrunkDrunks().add(drink);
-                        else{
-                            for (Drink d:drinkManager.getDrunkDrunks()) {
-                                if(d.getName().equals(drink.getName())) {
-                                    double temp = d.getAmount();
-                                    System.out.println(temp);
-                                    drinkManager.getDrunkDrunks().remove(d);
-                                    drink.setAmount(drink.getAmount()+temp);
-                                    System.out.println(drink.getAmount());
-                                    drinkManager.getDrunkDrunks().add(drink);
+                            double sum = 0.0;
+                            for (Drink d : drinkManager.getDrunkDrunks()) {
+                                if (d.getName().equals(drink.getName())) {
+                                    sum+=d.getAmount();
 
                                 }
 
                             }
-                        }
+                        System.out.println(sum);
 
                     }
                 });
