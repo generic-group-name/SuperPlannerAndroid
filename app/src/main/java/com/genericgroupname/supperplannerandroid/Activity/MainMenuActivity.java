@@ -221,22 +221,10 @@ public class MainMenuActivity extends AppCompatActivity {
 
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position,
-                                            long id) {
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Drink drink = drinkManager.getDri().get(position);
                         Toast.makeText(MainMenuActivity.this, "kliknieto " + drink.getName(), Toast.LENGTH_SHORT).show();
-
                             drinkManager.getDrunkDrunks().add(drink);
-                            double sum = 0.0;
-                            for (Drink d : drinkManager.getDrunkDrunks()) {
-                                if (d.getName().equals(drink.getName())) {
-                                    sum+=d.getAmount();
-
-                                }
-
-                            }
-                        System.out.println(sum);
-
                     }
                 });
 
