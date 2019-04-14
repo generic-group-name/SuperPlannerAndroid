@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
-    android:layout_height="500dp"
+    android:layout_height="450dp"
     android:layout_gravity="center"
+    android:background="@drawable/ic_bye"
     android:orientation="vertical">
 
     <TextView
@@ -14,7 +15,7 @@
         android:layout_marginStart="104dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="107dp"
-        android:text="Well done!"
+        android:text="Great!"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

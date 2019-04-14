@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="412dp"
-    android:layout_height="650dp">
+    android:layout_height="480dp"
+    android:background="@drawable/ic_time">
 
     <Button
         android:id="@+id/start"
@@ -26,7 +27,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="301dp"
         android:background="@drawable/roundedbutton"
         android:text="End Day"
         android:textColor="@color/white"
@@ -41,22 +41,23 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="106dp"
-        android:layout_marginTop="235dp"
         android:layout_marginEnd="106dp"
+        android:layout_marginBottom="40dp"
         android:gravity="center"
         android:textSize="35dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/start"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/intervalTypeView"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="106dp"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="106dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="60dp"
         android:gravity="center"
         android:textSize="35dp"
         app:layout_constraintBottom_toTopOf="@+id/timmerView"

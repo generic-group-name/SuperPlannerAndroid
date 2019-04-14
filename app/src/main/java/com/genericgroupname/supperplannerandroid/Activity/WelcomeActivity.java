@@ -36,6 +36,7 @@ public class WelcomeActivity extends AppCompatActivity {
             Intent s = new Intent(getApplicationContext(), MainMenuActivity.class);
             finish();
             startActivity(s);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
         //TODO zaladowanie ustawiem uzytkownika z tekstu
         // jesli sie uda wywal do main menu
@@ -45,9 +46,10 @@ public class WelcomeActivity extends AppCompatActivity {
                if(PlanService.isRunning != null )
                    if(PlanService.isRunning)
                    Toast.makeText(WelcomeActivity.this, "true", Toast.LENGTH_SHORT).show();
-                Intent s = new Intent(getApplicationContext(), MainMenuActivity.class);
+                Intent s = new Intent(getApplicationContext(), InterviewActivity.class);
                 finish();
                 startActivity(s);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
 

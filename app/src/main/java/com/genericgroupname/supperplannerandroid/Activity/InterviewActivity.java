@@ -1,6 +1,7 @@
 package com.genericgroupname.supperplannerandroid.Activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -55,6 +56,18 @@ private Button nextBtn;
                 man.setChecked(false);
             }
         });
+        lightTheme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+            }
+        });
+        darkTheme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getWindow().getDecorView().setBackgroundColor(Color.parseColor("#43434E"));
+            }
+        });
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +91,7 @@ private Button nextBtn;
                     Intent s = new Intent(getApplicationContext(), MainMenuActivity.class);
                         finish();
                         startActivity(s);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
 
             }

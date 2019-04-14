@@ -1,5 +1,5 @@
 package com.genericgroupname.supperplannerandroid.Exercise;
 
-enum ExerciseType {
+public enum ExerciseType {
 BACK,EYE,MIND;
 }
