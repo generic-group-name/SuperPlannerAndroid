@@ -45,7 +45,7 @@ public class WelcomeActivity extends AppCompatActivity {
                if(PlanService.isRunning != null )
                    if(PlanService.isRunning)
                    Toast.makeText(WelcomeActivity.this, "true", Toast.LENGTH_SHORT).show();
-                Intent s = new Intent(getApplicationContext(), InterviewActivity.class);
+                Intent s = new Intent(getApplicationContext(), MainMenuActivity.class);
                 finish();
                 startActivity(s);
             }

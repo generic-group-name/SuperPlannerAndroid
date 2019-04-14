@@ -3,6 +3,15 @@ package com.genericgroupname.supperplannerandroid.Utils;
 public class Clock {
     private int min;
     private int sec;
+    private long time;
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public long getTime() {
+        return time;
+    }
 
     public int getMin() {
         return min;
@@ -20,7 +29,7 @@ public class Clock {
         this.sec = sec;
     }
 
-    public String getTime(){
+    public String getTimmer(){
         String timeLeft;
         timeLeft = ""+ min+":";
         if(sec<10)

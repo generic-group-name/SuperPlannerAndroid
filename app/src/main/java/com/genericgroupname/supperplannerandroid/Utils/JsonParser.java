@@ -40,6 +40,12 @@ public class JsonParser {
         jsonObject.put("back", user.getPreferredBack());
         jsonObject.put("mind", user.getPreferredPsycho());
         jsonObject.put("number",user.getNumberOfTrainingDay());
+        jsonObject.put("first",user.getFirstDayGrade());
+        jsonObject.put("second",user.getSecondDayGrade());
+        jsonObject.put("third",user.getThirdDayGrade());
+        jsonObject.put("fourth",user.getFourthDayGrade());
+        jsonObject.put("fifth",user.getFifthDayGrade());
+
         ObjectOutput out = new ObjectOutputStream(new FileOutputStream
                 (new File(context.getCacheDir(), "") + File.separator + "cacheFile.srl"));
         out.writeObject(jsonObject.toString());
@@ -84,7 +90,7 @@ public class JsonParser {
                 themeName = ThemeName.DARK;
 
 
-            return new User(jsonObject.getString("name"),
+            User user =  new User(jsonObject.getString("name"),
                     jsonObject.getInt("age"),
                     jsonObject.getDouble("weight"),
                     jsonObject.getDouble("height"),
@@ -93,8 +99,18 @@ public class JsonParser {
                     jsonObject.getBoolean("back"),
                     jsonObject.getBoolean("mind"),
                     jsonObject.getInt("number")
-
             );
+            if(jsonObject.getDouble("first")!=0.0)
+                user.setFirstDayGrade(jsonObject.getDouble("first"));
+            if(jsonObject.getDouble("second")!=0.0)
+                user.setSecondDayGrade(jsonObject.getDouble("second"));
+            if(jsonObject.getDouble("third")!=0.0)
+                user.setThirdDayGrade(jsonObject.getDouble("third"));
+            if(jsonObject.getDouble("fourth")!=0.0)
+                user.setFourthDayGrade(jsonObject.getDouble("fourth"));
+            if(jsonObject.getDouble("fifth")!=0.0)
+                user.setFifthDayGrade(jsonObject.getDouble("fifth"));
+            return user;
         }
         else {
            return null;
