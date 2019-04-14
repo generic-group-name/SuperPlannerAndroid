@@ -40,4 +40,28 @@ public class DrinkManager {
     public ArrayList<Drink> getDri() {
         return dri;
     }
+    public Double getAmount(){
+        double sum = 0.0;
+        for (Drink d:drunkDrunks) {
+            sum+=d.getAmount();
+        }
+        return sum;
+    }
+    public Double getCofeine(){
+        double sum = 0.0;
+        for (Drink d:drunkDrunks) {
+            sum+=d.getAmount()/100*d.getCofeine();
+        }
+        return sum;
+
+    }
+    public Double getSugar(){
+        double sum = 0.0;
+        for (Drink d:drunkDrunks) {
+            sum+=d.getAmount()/100*d.getSugar();
+        }
+        return sum;
+
+    }
 }
+

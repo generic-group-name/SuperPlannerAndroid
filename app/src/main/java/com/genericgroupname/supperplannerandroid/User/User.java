@@ -12,18 +12,22 @@ public class User {
     final private Double weight;
     final private Double height;
     final private Sex sex;
-    final private ThemeName themeName;
+    private ThemeName themeName;
     final private Boolean preferredEye;
     final private Boolean preferredBack;
     final private Boolean preferredPsycho;
     private Integer numberOfTrainingDay;
-    private Double firstDayGrade=0.0;
-    private Double secondDayGrade=0.0;
-    private Double thirdDayGrade=0.0;
-    private Double fourthDayGrade=0.0;
-    private Double fifthDayGrade=0.0;
+    private Double firstDayGrade = 0.0;
+    private Double secondDayGrade = 0.0;
+    private Double thirdDayGrade = 0.0;
+    private Double fourthDayGrade = 0.0;
+    private Double fifthDayGrade = 0.0;
 
     private JsonParser jsonParser;
+
+    public void setThemeName(ThemeName themeName) {
+        this.themeName = themeName;
+    }
 
     public User(String name, Integer age, Double weight, Double height, Sex sex, ThemeName themeName, Boolean preferredEye, Boolean preferredBack, Boolean preferredPsycho, Integer numberOfTrainingDay) throws IOException, JSONException {
         this.name = name;
@@ -120,6 +124,30 @@ public class User {
 
     public void setFifthDayGrade(Double fifthDayGrade) {
         this.fifthDayGrade = fifthDayGrade;
+    }
+
+    public double getWaterAmount() {
+        return this.weight * 30;
+    }
+    public double getCofeineMax(){
+        if (age > 18)
+        {
+            return 300;
+        }
+        else
+        {
+            return 100;
+        }
+    }
+    public double getSugarMax(){
+        if (sex == Sex.MAN)
+        {
+            return 37.5;
+        }
+        else
+        {
+            return 25;
+        }
     }
 
     @Override

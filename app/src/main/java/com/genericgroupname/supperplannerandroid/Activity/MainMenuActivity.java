@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
@@ -31,6 +32,7 @@ import com.genericgroupname.supperplannerandroid.Exercise.ExerciseManager;
 import com.genericgroupname.supperplannerandroid.Interval.IntervalType;
 import com.genericgroupname.supperplannerandroid.R;
 import com.genericgroupname.supperplannerandroid.Service.PlanService;
+import com.genericgroupname.supperplannerandroid.User.ThemeName;
 import com.genericgroupname.supperplannerandroid.User.User;
 import com.genericgroupname.supperplannerandroid.Utils.JsonParser;
 
@@ -55,6 +57,10 @@ public class MainMenuActivity extends AppCompatActivity {
         isRunning = true;
         drinkManager = new DrinkManager();
         setContentView(R.layout.activity_main_menu);
+        if(WelcomeActivity.getUser.getThemeName()==ThemeName.LIGHT)
+            getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+        else
+            getWindow().getDecorView().setBackgroundColor(Color.parseColor("#43434E"));
         content = findViewById(R.id.asdMenuView);
         plan = findViewById(R.id.togglePlan);
         drinks = findViewById(R.id.toggleDrinks);
@@ -148,7 +154,59 @@ public class MainMenuActivity extends AppCompatActivity {
                         content.removeAllViews();
                         content.addView(View.inflate(getApplicationContext(), R.layout.drink_layout, null));
                         drinks.setChecked(true);
+                        Button addDrink = findViewById(R.id.addBtn);
+                        Button showChart = findViewById(R.id.showChart);
+                        final ListView listView = findViewById(R.id.listDrink);
+                        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), drinkManager.getDri());
+                        listView.setAdapter(customAdapter);
+                        showChart.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.setContentView(R.layout.chart_dialog);
+                                dialog.show();
+                                TextView woda = dialog.findViewById(R.id.woda);
+                                TextView cukier = dialog.findViewById(R.id.cukier);
+                                TextView kofeina = dialog.findViewById(R.id.kofeina);
+                                TextView warning = dialog.findViewById(R.id.warning);
+                                warning.setText("");
+                                woda.setText("Water intake: " + drinkManager.getAmount().toString() + " / " + WelcomeActivity.getUser.getWaterAmount() + " ml");
+                                cukier.setText("Sugar intake: " + drinkManager.getSugar().toString() + " / " + WelcomeActivity.getUser.getSugarMax() + " g");
+                                kofeina.setText("Cafeine intake: " + drinkManager.getCofeine().toString() + " / " + WelcomeActivity.getUser.getCofeineMax() + " mg");
+                                if (drinkManager.getAmount() < WelcomeActivity.getUser.getWaterAmount())
+                                    warning.append("Drink more water " + System.getProperty("line.separator"));
+                                if (drinkManager.getCofeine() > WelcomeActivity.getUser.getCofeineMax())
+                                    warning.append("Avoid cafeine" + System.getProperty("line.separator"));
+                                if (drinkManager.getSugar() > WelcomeActivity.getUser.getSugarMax())
+                                    warning.append("Avoid sweetened drinks" + System.getProperty("line.separator"));
+                                Button close = dialog.findViewById(R.id.closeChart);
+                                close.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
+                                    }
+                                });
 
+                            }
+                        });
+                        addDrink.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.setContentView(R.layout.add_dialog);
+                                dialog.show();
+                                addDrink();
+                                content.removeAllViews();
+                                content.addView(View.inflate(getApplicationContext(), R.layout.plan_layout, null));
+                                plan.setChecked(true);
+                            }
+                        });
+
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Drink drink = drinkManager.getDri().get(position);
+                                drinkManager.getDrunkDrunks().add(drink);
+                            }
+                        });
                     }
                 });
                 stop.setOnClickListener(new View.OnClickListener() {
@@ -215,16 +273,58 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 content.removeAllViews();
                 content.addView(View.inflate(getApplicationContext(), R.layout.drink_layout, null));
+                Button addDrink = findViewById(R.id.addBtn);
+                Button showChart = findViewById(R.id.showChart);
                 final ListView listView = findViewById(R.id.listDrink);
                 CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), drinkManager.getDri());
                 listView.setAdapter(customAdapter);
+                showChart.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.setContentView(R.layout.chart_dialog);
+                        dialog.show();
+                        TextView woda = dialog.findViewById(R.id.woda);
+                        TextView cukier = dialog.findViewById(R.id.cukier);
+                        TextView kofeina = dialog.findViewById(R.id.kofeina);
+                        TextView warning = dialog.findViewById(R.id.warning);
+                        warning.setText("");
+                        woda.setText("Water intake: " + drinkManager.getAmount().toString() + " / " + WelcomeActivity.getUser.getWaterAmount() + " ml");
+                        cukier.setText("Sugar intake: " + drinkManager.getSugar().toString() + " / " + WelcomeActivity.getUser.getSugarMax() + " g");
+                        kofeina.setText("Cafeine intake: " + drinkManager.getCofeine().toString() + " / " + WelcomeActivity.getUser.getCofeineMax() + " mg");
+                        if (drinkManager.getAmount() < WelcomeActivity.getUser.getWaterAmount())
+                            warning.append("Drink more water " + System.getProperty("line.separator"));
+                        if (drinkManager.getCofeine() > WelcomeActivity.getUser.getCofeineMax())
+                            warning.append("Avoid cafeine" + System.getProperty("line.separator"));
+                        if (drinkManager.getSugar() > WelcomeActivity.getUser.getSugarMax())
+                            warning.append("Avoid sweetened drinks" + System.getProperty("line.separator"));
+                        Button close = dialog.findViewById(R.id.closeChart);
+                        close.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                    }
+                });
+
+                addDrink.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.setContentView(R.layout.add_dialog);
+                        dialog.show();
+                        addDrink();
+                        content.removeAllViews();
+                        content.addView(View.inflate(getApplicationContext(), R.layout.plan_layout, null));
+                        plan.setChecked(true);
+                    }
+                });
 
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Drink drink = drinkManager.getDri().get(position);
-                        Toast.makeText(MainMenuActivity.this, "kliknieto " + drink.getName(), Toast.LENGTH_SHORT).show();
-                            drinkManager.getDrunkDrunks().add(drink);
+                        drinkManager.getDrunkDrunks().add(drink);
                     }
                 });
 
@@ -237,8 +337,76 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 content.removeAllViews();
                 content.addView(View.inflate(getApplicationContext(), R.layout.settings_layout, null));
+                RadioButton lightTheme = findViewById(R.id.setlig);
+                RadioButton darkTheme = findViewById(R.id.setdar);
+                final JsonParser jsonParser = new JsonParser(getApplicationContext());
+                if(WelcomeActivity.getUser.getThemeName()== ThemeName.LIGHT) {
+                    lightTheme.setChecked(true);
+                    darkTheme.setChecked(false);
+                }
+                else{
+                    lightTheme.setChecked(false);
+                    darkTheme.setChecked(true);
+                }
+                lightTheme.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        WelcomeActivity.getUser.setThemeName(ThemeName.LIGHT);
+                        try {
+                            jsonParser.saveJson(WelcomeActivity.getUser);
+                            if(WelcomeActivity.getUser.getThemeName()==ThemeName.LIGHT)
+                                getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+                            else
+                                getWindow().getDecorView().setBackgroundColor(Color.parseColor("#43434E"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                darkTheme.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        WelcomeActivity.getUser.setThemeName(ThemeName.DARK);
+                        try {
+                            jsonParser.saveJson(WelcomeActivity.getUser);
+                            if(WelcomeActivity.getUser.getThemeName()==ThemeName.LIGHT)
+                                getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+                            else
+                                getWindow().getDecorView().setBackgroundColor(Color.parseColor("#43434E"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
             }
         });
+    }
+
+    private void addDrink() {
+        Button add = dialog.findViewById(R.id.addDrink);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainMenuActivity.this, "Drink added", Toast.LENGTH_SHORT).show();
+                EditText name = dialog.findViewById(R.id.drinkName);
+                EditText sugar = dialog.findViewById(R.id.sugarDrink);
+                EditText cofeine = dialog.findViewById(R.id.drinkCofeine);
+                EditText amount = dialog.findViewById(R.id.drinkAmount);
+                addToTheList(name.getText().toString(), sugar.getText().toString(), cofeine.getText().toString(), amount.getText().toString());
+            }
+        });
+
+    }
+
+    private void addToTheList(String toString, String toString1, String toString2, String toString3) {
+        drinkManager.getDri().add(new Drink(toString, Double.parseDouble(toString1), Double.parseDouble(toString2), Double.parseDouble(toString3)));
+        dialog.dismiss();
     }
 
     private void getRate() throws IOException, JSONException {
